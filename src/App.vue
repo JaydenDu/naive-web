@@ -20,15 +20,12 @@
           <component :is="Component" v-if="!tabStore.reloading" :key="curRoute.fullPath" />
         </KeepAlive>
       </component>
-
-      <LayoutSetting class="fixed right-12 top-1/2 z-999" />
     </router-view>
   </n-config-provider>
 </template>
 
 <script setup>
 import { zhCN, dateZhCN, darkTheme } from 'naive-ui'
-import { LayoutSetting } from '@/components'
 import { useAppStore, useTabStore } from '@/store'
 
 const layouts = new Map()

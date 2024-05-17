@@ -17,12 +17,10 @@ import App from './App.vue'
 import { setupRouter } from './router'
 import { setupStore } from './store'
 import { setupNaiveDiscreteApi } from './utils'
-import { setupDirectives } from './directives'
 
 async function bootstrap() {
   const app = createApp(App)
   setupStore(app)
-  setupDirectives(app)
   await setupRouter(app)
   app.mount('#app')
   setupNaiveDiscreteApi()

@@ -12,7 +12,6 @@
       <main :class="{ 'flex-1': full }" class="m-12"><slot /></main>
     </transition>
     <slot v-if="$slots.footer" name="footer" />
-    <TheFooter v-else-if="showFooter" class="mb-12 mt-auto" />
     <n-back-top :bottom="20" />
   </main>
 </template>

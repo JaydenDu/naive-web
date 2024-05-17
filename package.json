@@ -32,7 +32,6 @@
     "@iconify/utils": "^2.1.23",
     "@unocss/eslint-config": "^0.58.5",
     "@unocss/preset-rem-to-px": "^0.59.4",
-    "@unocss/preset-wind": "^0.60.2",
     "@vitejs/plugin-vue": "^5.0.4",
     "@zclzone/eslint-config": "^0.0.5",
     "esno": "^4.7.0",
@@ -45,8 +44,7 @@
     "unplugin-vue-components": "^0.26.0",
     "vite": "^5.2.10",
     "vite-plugin-router-warn": "^1.0.0",
-    "vite-plugin-simple-html": "^0.1.2",
-    "vite-plugin-vue-devtools": "^7.1.2"
+    "vite-plugin-simple-html": "^0.1.2"
   },
   "eslintConfig": {
     "extends": [

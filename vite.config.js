@@ -9,14 +9,12 @@
 import path from 'path'
 import { defineConfig, loadEnv } from 'vite'
 import Vue from '@vitejs/plugin-vue'
-import VueDevTools from 'vite-plugin-vue-devtools'
 import Unocss from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import simpleHtmlPlugin from 'vite-plugin-simple-html'
 import removeNoMatch from 'vite-plugin-router-warn'
-import presetWind from '@unocss/preset-wind'
 
 export default defineConfig(({ command, mode }) => {
   const isBuild = command === 'build'
@@ -27,9 +25,7 @@ export default defineConfig(({ command, mode }) => {
     base: VITE_PUBLIC_PATH || '/',
     plugins: [
       Vue(),
-      VueDevTools(),
       Unocss(),
-      presetWind(),
       AutoImport({
         imports: ['vue', 'vue-router'],
         dts: false,

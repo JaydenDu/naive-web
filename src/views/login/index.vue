@@ -1,11 +1,3 @@
-<!--------------------------------
- - @Author: Ronnie Zhang
- - @LastEditor: Ronnie Zhang
- - @LastEditTime: 2023/12/05 21:28:36
- - @Email: zclzone@outlook.com
- - Copyright © 2023 Ronnie Zhang(大脸怪) | https://isme.top
- --------------------------------->
-
 <template>
   <div class="wh-full flex-col bg-[url(@/assets/images/login_bg.webp)] bg-cover">
     <div
@@ -16,9 +8,11 @@
       </div>
 
       <div class="w-320 flex-col px-20 py-32">
-        <h2 class="f-c-c text-24 text-#6a6a6a font-normal">
+        <h2 class="flex items-center justify-between text-24 text-#6a6a6a font-normal">
           <img src="@/assets/images/logo.png" class="mr-12 h-50" />
-          {{ title }}
+          <span>
+            {{ title }}
+          </span>
         </h2>
         <n-input
           v-model:value="loginInfo.username"
@@ -45,32 +39,10 @@
           </template>
         </n-input>
 
-        <div class="mt-20 flex items-center">
-          <n-input
-            v-model:value="loginInfo.captcha"
-            class="h-40 items-center"
-            palceholder="请输入验证码"
-            :maxlength="4"
-            @keydown.enter="handleLogin()"
-          >
-            <template #prefix>
-              <i class="i-fe:key mr-12 opacity-20" />
-            </template>
-          </n-input>
-          <img
-            v-if="captchaUrl"
-            :src="captchaUrl"
-            alt="验证码"
-            height="40"
-            class="ml-12 w-80 cursor-pointer"
-            @click="initCaptcha"
-          />
-        </div>
-
         <n-checkbox
           class="mt-20"
           :checked="isRemember"
-          label="记住我"
+          label="Remember"
           :on-update:checked="(val) => (isRemember = val)"
         />
 
@@ -81,7 +53,7 @@
             ghost
             @click="quickLogin()"
           >
-            一键体验
+            注册
           </n-button>
 
           <n-button
@@ -95,13 +67,11 @@
         </div>
       </div>
     </div>
-
-    <TheFooter class="py-12" />
   </div>
 </template>
 
 <script setup>
-import { throttle, lStorage } from '@/utils'
+import { lStorage } from '@/utils'
 import { useStorage } from '@vueuse/core'
 import api from './api'
 import { useAuthStore } from '@/store'
@@ -109,24 +79,18 @@ import { useAuthStore } from '@/store'
 const authStore = useAuthStore()
 const router = useRouter()
 const route = useRoute()
-const title = import.meta.env.VITE_TITLE
+const title = 'Naive web Pool'
 
 const loginInfo = ref({
   username: '',
   password: '',
 })
 
-const captchaUrl = ref('')
-const initCaptcha = throttle(() => {
-  captchaUrl.value = '/api/auth/captcha?' + Date.now()
-}, 500)
-
 const localLoginInfo = lStorage.get('loginInfo')
 if (localLoginInfo) {
   loginInfo.value.username = localLoginInfo.username || ''
   loginInfo.value.password = localLoginInfo.password || ''
 }
-initCaptcha()
 
 function quickLogin() {
   loginInfo.value.username = 'admin'
@@ -152,10 +116,6 @@ async function handleLogin(isQuick) {
     onLoginSuccess(data)
   } catch (error) {
     // 10003为验证码错误专属业务码
-    if (error?.code === 10003) {
-      // 为防止爆破，验证码错误则刷新验证码
-      initCaptcha()
-    }
     $message.destroy('login')
     console.error(error)
   }
