@@ -1,11 +1,3 @@
-/**********************************
- * @Author: Ronnie Zhang
- * @LastEditor: Ronnie Zhang
- * @LastEditTime: 2023/12/05 21:30:57
- * @Email: zclzone@outlook.com
- * Copyright © 2023 Ronnie Zhang(大脸怪) | https://isme.top
- **********************************/
-
 import { defineConfig, presetUno, presetIcons, presetAttributify } from 'unocss'
 import presetRemToPx from '@unocss/preset-rem-to-px'
 import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
@@ -30,16 +22,7 @@ export default defineConfig({
     presetRemToPx({ baseFontSize: 4 }),
   ],
   safelist: icons.map((icon) => `${icon} ${icon}?mask`.split(' ')).flat(),
-  shortcuts: [
-    ['wh-full', 'w-full h-full'],
-    ['f-c-c', 'flex justify-center items-center'],
-    ['flex-col', 'flex flex-col'],
-    ['card-border', 'border border-solid border-light_border dark:border-dark_border'],
-    ['auto-bg', 'bg-white dark:bg-dark'],
-    ['auto-bg-hover', 'hover:bg-#eaf0f1 hover:dark:bg-#1b2429'],
-    ['auto-bg-highlight', 'bg-#eaf0f1 dark:bg-#1b2429'],
-    ['text-highlight', 'rounded-4 px-8 py-2 auto-bg-highlight'],
-  ],
+  shortcuts: [['card-border', 'border border-solid border-light_border dark:border-dark_border']],
   rules: [
     [
       'card-shadow',

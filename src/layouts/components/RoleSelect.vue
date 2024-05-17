@@ -1,13 +1,5 @@
-<!--------------------------------
- - @Author: Ronnie Zhang
- - @LastEditor: Ronnie Zhang
- - @LastEditTime: 2023/12/12 09:03:32
- - @Email: zclzone@outlook.com
- - Copyright © 2023 Ronnie Zhang(大脸怪) | https://isme.top
- --------------------------------->
-
 <template>
-  <MeModal ref="modalRef" title="请选择角色" width="360px" class="p-12">
+  <div>
     <n-radio-group v-model:value="roleCode" class="cus-scroll-y max-h-420 w-full py-16">
       <n-space vertical :size="24" class="mx-12">
         <n-radio-button
@@ -37,12 +29,11 @@
         </n-button>
       </div>
     </template>
-  </MeModal>
+  </div>
 </template>
 
 <script setup>
 import api from '@/api'
-import { MeModal } from '@/components'
 import { useModal } from '@/composables'
 import { useUserStore, useAuthStore } from '@/store'
 
@@ -50,7 +41,7 @@ const userStore = useUserStore()
 const authStore = useAuthStore()
 
 const roles = ref(userStore.roles || [])
-const roleCode = ref(userStore.currentRole?.code ?? roles[0]?.code ?? '')
+const roleCode = ref(userStore.currentRole?.code ?? roles.value[0]?.code ?? '')
 
 const [modalRef, okLoading] = useModal()
 function open(options) {

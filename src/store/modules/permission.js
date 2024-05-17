@@ -1,12 +1,3 @@
-/**********************************
- * @Author: Ronnie Zhang
- * @LastEditor: Ronnie Zhang
- * @LastEditTime: 2023/12/05 21:25:47
- * @Email: zclzone@outlook.com
- * Copyright © 2023 Ronnie Zhang(大脸怪) | https://isme.top
- **********************************/
-
-import { isExternal } from '@/utils'
 import { hyphenate } from '@vueuse/core'
 import { defineStore } from 'pinia'
 
@@ -49,7 +40,7 @@ export const usePermissionStore = defineStore('permission', {
     },
     generateRoute(item, parentKey) {
       let originPath = undefined
-      if (isExternal(item.path)) {
+      if (item.path) {
         originPath = item.path
         item.component = '/src/views/iframe/index.vue'
         item.path = `/iframe/${hyphenate(item.code)}`
