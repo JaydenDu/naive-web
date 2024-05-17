@@ -1,4 +1,4 @@
-const prefixKey = 'vue-naive-admin_'
+const prefixKey = 'btcx-pool_'
 
 class Storage {
   constructor(option) {
