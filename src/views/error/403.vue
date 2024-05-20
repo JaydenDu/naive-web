@@ -25,7 +25,7 @@ const route = useRoute()
 
 const back = history.state.back
 
-if (history.state.from === 'permission-guard') {
+if (history.state.from === 'express') {
   delete history.state.from
 } else if (route.query.path) {
   router.replace(route.query.path)

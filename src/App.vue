@@ -3,14 +3,12 @@
     class="h-full w-full"
     :locale="zhCN"
     :date-locale="dateZhCN"
-    :theme="appStore.isDark ? darkTheme : undefined"
-    :theme-overrides="appStore.naiveThemeOverrides"
+    :theme="mainStore.isDark ? darkTheme : undefined"
+    :theme-overrides="mainStore.naiveThemeOverrides"
   >
     <router-view v-if="Layout" v-slot="{ Component, route: curRoute }">
       <component :is="Layout">
-        <KeepAlive :include="keepAliveNames">
-          <component :is="Component" v-if="!tabStore.reloading" :key="curRoute.fullPath" />
-        </KeepAlive>
+        <component :is="Component" :key="curRoute.fullPath" />
       </component>
     </router-view>
   </n-config-provider>
@@ -18,7 +16,10 @@
 
 <script setup>
 import { zhCN, dateZhCN, darkTheme } from 'naive-ui'
-import { useAppStore, useTabStore } from '@/store'
+import { useMainStore } from '@/store'
+
+const route = useRoute()
+const mainStore = useMainStore()
 
 const layouts = new Map()
 function getLayout(name) {
@@ -29,20 +30,8 @@ function getLayout(name) {
   return layout
 }
 
-const route = useRoute()
-const appStore = useAppStore()
-if (appStore.layout === 'default') appStore.setLayout('')
 const Layout = computed(() => {
   if (!route.matched?.length) return null
-  return getLayout(route.meta?.layout || appStore.layout)
-})
-
-const tabStore = useTabStore()
-const keepAliveNames = computed(() => {
-  return tabStore.tabs.filter((item) => item.keepAlive).map((item) => item.name)
-})
-
-watchEffect(() => {
-  appStore.setThemeColor(appStore.primaryColor, appStore.isDark)
+  return getLayout(route.meta?.layout || mainStore.layout)
 })
 </script>

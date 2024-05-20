@@ -5,7 +5,6 @@ export const useTabStore = defineStore('tab', {
   state: () => ({
     tabs: [],
     activeTab: '',
-    reloading: false,
   }),
   getters: {
     activeIndex() {
@@ -35,9 +34,7 @@ export const useTabStore = defineStore('tab', {
       // 更新key可让keepAlive失效
       if (keepAlive) findItem.keepAlive = false
       $loadingBar.start()
-      this.reloading = true
       await nextTick()
-      this.reloading = false
       findItem.keepAlive = !!keepAlive
       setTimeout(() => {
         document.documentElement.scrollTo({ left: 0, top: 0 })

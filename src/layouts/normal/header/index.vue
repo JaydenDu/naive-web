@@ -26,23 +26,13 @@
 
 <script setup>
 import { UserAvatar } from '@/layouts/components'
-import { useDark, useToggle, useFullscreen } from '@vueuse/core'
-import { useAppStore } from '@/store'
+import { useDark, useToggle } from '@vueuse/core'
+import { useMainStore } from '@/store'
 
-const appStore = useAppStore()
+const mainStore = useMainStore()
 const isDark = useDark()
 const toggleDark = () => {
-  appStore.toggleDark()
+  mainStore.toggleDark()
   useToggle(isDark)()
 }
-
-const { isFullscreen, toggle } = useFullscreen()
-
-function handleLinkClick(link) {
-  window.open(link)
-}
-
-watchEffect(() => {
-  appStore.setThemeColor(appStore.primaryColor, appStore.isDark)
-})
 </script>

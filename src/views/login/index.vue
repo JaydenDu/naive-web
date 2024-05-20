@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full flex-col bg-[url(@/assets/images/login_bg.webp)] bg-cover">
+  <div class="h-full w-full flex flex-col bg-[url(@/assets/images/login_bg.webp)] bg-cover">
     <div
       class="m-auto max-w-700 min-w-345 flex items-center justify-center rounded-8 bg-white bg-opacity-20 bg-cover p-12 card-shadow dark:bg-dark"
     >
